@@ -44,4 +44,4 @@ for row in test:
     
     sum_sqdiff += (predicted - actual) ** 2
     
-print("MSE computed manually: {0}".format((sum_sqdiff * 1.0)/len(test)))
+print("RMSE computed manually: {0}".format( np.sqrt((sum_sqdiff * 1.0)/len(test)) ))
