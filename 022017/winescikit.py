@@ -27,9 +27,9 @@ test_X, test_Y = test.drop(['quality'], axis=1), test['quality']
 lr = LinearRegression()
 lr.fit(train_X, train_Y)
 
-print lr
-print 'coefficient: ',lr.coef_
-print 'intercept: ',lr.intercept_
+print(lr)
+print('coefficient: {0}').format(lr.coef_)
+print('intercept: {0}').format(lr.intercept_)
 
 #Test on test data
 test_Predictions = lr.predict(test_X)
@@ -40,20 +40,20 @@ plt.xlabel('real')
 plt.show()
 
 # Compute MSE using sklearn
-print("GOF: {0}".format(1 - (mean_squared_error(test_Y, test_Predictions) / np.var(test_Y))))
+#print("GOF: {0}".format(1 - (mean_squared_error(test_Y, test_Predictions) / np.var(test_Y))))
 print("RMSE using sklearn: {0}".format(np.sqrt(mean_squared_error(test_Y, test_Predictions))))
-#
-##Compute MSE manually
-#sum_sqdiff = 0
-#for actual, predicted in zip(test_Y, test_Predictions):
-#    sum_sqdiff += (predicted - actual) ** 2
-#    
-#print("MSE computed manually: {0}".format(np.sqrt((sum_sqdiff * 1.0)/len(test_Y))))
-#
-##Alternate way
-#err = abs(test_Y - test_Predictions)
-#total_error = np.dot(err,err)
-#print("MSE computed alternate: {0}".format(np.sqrt((total_error * 1.0)/len(test_Y))))
+
+#Compute MSE manually
+sum_sqdiff = 0
+for actual, predicted in zip(test_Y, test_Predictions):
+    sum_sqdiff += (predicted - actual) ** 2
+    
+print("MSE computed manually: {0}".format(np.sqrt((sum_sqdiff * 1.0)/len(test_Y))))
+
+#Alternate way
+err = abs(test_Y - test_Predictions)
+total_error = np.dot(err,err)
+print("MSE computed alternate: {0}".format(np.sqrt((total_error * 1.0)/len(test_Y))))
 
 #----------------------------------------
 
@@ -62,11 +62,11 @@ scaler.fit(train_X)  # Don't cheat - fit only on training data
 train_X = scaler.transform(train_X)
 test_X = scaler.transform(test_X)  # apply same transformation to test data
 
-clf = linear_model.SGDRegressor(n_iter=500)
+clf = linear_model.SGDRegressor(n_iter=1)
 clf.fit(train_X, train_Y)
 print clf
-print 'coefficient: ', clf.coef_
-print 'intercept: ', clf.intercept_
+print('coefficient: {0}').format(clf.coef_)
+print('intercept: {0}').format(clf.intercept_)
 
 #Test on test data
 test_Predictions = clf.predict(test_X)
